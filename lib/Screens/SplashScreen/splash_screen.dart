@@ -35,10 +35,11 @@ class SplashScreenState extends State<SplashScreen> {
 
   int retryCount = 0;
 
+  //Comment the isActiveBuyer check function  --> so that we can access the screen flow
   checkUserValidity() async {
     final bool isConnected = await InternetConnection().hasInternetAccess;
     if (isConnected) {
-      await PurchaseModel().isActiveBuyer().then((value) {
+      /*await PurchaseModel().isActiveBuyer().then((value) {
         if (!value) {
           if(mounted){
             showDialog(
@@ -62,10 +63,9 @@ class SplashScreenState extends State<SplashScreen> {
               ),
             );
           }
-        } else {
+        } else {*/
           nextPage();
-        }
-      });
+
     } else {
       if(retryCount < 3){
         retryCount++;
