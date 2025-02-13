@@ -3230,6 +3230,16 @@ class S {
     );
   }
 
+  /// `Confirm password`
+  String get hintConfirmPassword {
+    return Intl.message(
+      'Enter confirm password',
+      name: 'hintConfirmPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Please enter a bigger password`
   String get pleaseEnterABiggerPassword {
     return Intl.message(
