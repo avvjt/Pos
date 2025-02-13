@@ -163,7 +163,7 @@ class _HomeScreenState extends State<HomeScreen> {
               backgroundColor: kWhite,
               titleSpacing: 5,
               surfaceTintColor: kWhite,
-              actions: [IconButton(onPressed: () async => refreshAllProviders(ref: ref), icon: const Icon(Icons.refresh))],
+              actions: [IconButton(onPressed: () async => refreshAllProviders(ref: ref), icon: const Icon(Icons.notifications_outlined))],
               leading: Padding(
                 padding: const EdgeInsets.all(10),
                 child: GestureDetector(

@@ -100,13 +100,13 @@ class _HomeState extends State<Home> {
                 BottomNavigationBarItem(
                   icon: _tabIndex == 0
                       ? SvgPicture.asset(
-                          'assets/cHome.svg',
+                          'assets/home_nav.svg',
                           fit: BoxFit.scaleDown,
                           height: 28,
                           width: 28,
                         )
                       : SvgPicture.asset(
-                          'assets/home.svg',
+                          'assets/home_nav.svg',
                           colorFilter: const ColorFilter.mode(kGreyTextColor, BlendMode.srcIn),
                           height: 24,
                           width: 24,
@@ -116,29 +116,29 @@ class _HomeState extends State<Home> {
                 BottomNavigationBarItem(
                   icon: _tabIndex == 1
                       ? SvgPicture.asset(
-                          'assets/dashbord1.svg',
+                          'assets/menu_nav.svg',
                           height: 28,
                           width: 28,
                           fit: BoxFit.scaleDown,
                         )
                       : SvgPicture.asset(
-                          'assets/dashbord.svg',
+                          'assets/menu_nav.svg',
                           height: 24,
                           colorFilter: const ColorFilter.mode(kGreyTextColor, BlendMode.srcIn),
                           width: 24,
                         ),
-                  label: 'Dashboard',
+                  label: 'Menu',
                 ),
                 BottomNavigationBarItem(
                   icon: _tabIndex == 2
                       ? SvgPicture.asset(
-                          'assets/cFile.svg',
+                          'assets/report_nav.svg',
                           height: 28,
                           width: 28,
                           fit: BoxFit.scaleDown,
                         )
                       : SvgPicture.asset(
-                          'assets/file.svg',
+                          'assets/report_nav.svg',
                           colorFilter: const ColorFilter.mode(kGreyTextColor, BlendMode.srcIn),
                           height: 24,
                           width: 24,
@@ -148,13 +148,13 @@ class _HomeState extends State<Home> {
                 BottomNavigationBarItem(
                   icon: _tabIndex == 3
                       ? SvgPicture.asset(
-                          'assets/cSetting.svg',
+                          'assets/setting_nav.svg',
                           height: 28,
                           width: 28,
                           fit: BoxFit.scaleDown,
                         )
                       : SvgPicture.asset(
-                          'assets/setting.svg',
+                          'assets/setting_nav.svg',
                           colorFilter: const ColorFilter.mode(kGreyTextColor, BlendMode.srcIn),
                           height: 24,
                           width: 24,
