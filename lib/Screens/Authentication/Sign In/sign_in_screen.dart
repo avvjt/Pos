@@ -261,6 +261,7 @@ class _SignInState extends State<SignIn> {
                       ),
                     ),
 
+                    const SizedBox(height: 5.0),
                     TextFormField(
                       focusNode: _emailFocusNode, // Assign email FocusNode
                       controller: emailController,
@@ -292,6 +293,7 @@ class _SignInState extends State<SignIn> {
                       ),
                     ),
 
+                    const SizedBox(height: 5.0),
                     TextFormField(
                       focusNode: _passwordFocusNode, // Assign password FocusNode
                       controller: passwordController,

@@ -513,7 +513,7 @@ class S {
   /// `Enter Full Address`
   String get enterFullAddress {
     return Intl.message(
-      'Enter Full Address',
+      'Enter full address',
       name: 'enterFullAddress',
       desc: '',
       args: [],
@@ -3403,7 +3403,7 @@ class S {
   /// `6-digits pin has been sent to your email address: `
   String get digits {
     return Intl.message(
-      '6-digits pin has been sent to your email address: ',
+      '6-digits pin has been sent to your email address ',
       name: 'digits',
       desc: '',
       args: [],

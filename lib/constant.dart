@@ -35,7 +35,7 @@ const String companyName = 'Acnoo';
 
 const kButtonDecoration = BoxDecoration(
   borderRadius: BorderRadius.all(
-    Radius.circular(5),
+    Radius.circular(30),
   ),
 );
 

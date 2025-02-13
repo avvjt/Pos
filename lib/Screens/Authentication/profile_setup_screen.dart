@@ -43,7 +43,8 @@ class _ProfileSetupState extends State<ProfileSetup> {
   TextEditingController vatGstTitleController = TextEditingController();
   TextEditingController vatGstNumberController = TextEditingController();
 
-  DropdownButton<BusinessCategory> getCategory({required List<BusinessCategory> list}) {
+  DropdownButton<BusinessCategory> getCategory(
+      {required List<BusinessCategory> list}) {
     List<DropdownMenuItem<BusinessCategory>> dropDownItems = [];
 
     for (BusinessCategory category in list) {
@@ -86,12 +87,14 @@ class _ProfileSetupState extends State<ProfileSetup> {
                   lang.S.of(context).setUpProfile,
                   style: GoogleFonts.poppins(
                     color: Colors.black,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 centerTitle: true,
                 backgroundColor: Colors.white,
                 elevation: 0.0,
               ),
+
               bottomNavigationBar: ButtonGlobal(
                 iconWidget: Icons.arrow_forward,
                 buttontext: lang.S.of(context).continueButton,
@@ -101,25 +104,32 @@ class _ProfileSetupState extends State<ProfileSetup> {
                   if (selectedBusinessCategory != null) {
                     if (_formKey.currentState!.validate()) {
                       try {
-                        BusinessSetupRepo businessSetupRepo = BusinessSetupRepo();
+                        BusinessSetupRepo businessSetupRepo =
+                            BusinessSetupRepo();
                         await businessSetupRepo.businessSetup(
                           context: context,
                           name: nameController.text,
                           phone: phoneController.text,
-                          address: addressController.text.isEmptyOrNull ? null : addressController.text,
+                          address: addressController.text.isEmptyOrNull
+                              ? null
+                              : addressController.text,
                           categoryId: selectedBusinessCategory!.id.toString(),
-                          image: pickedImage == null ? null : File(pickedImage!.path),
+                          image: pickedImage == null
+                              ? null
+                              : File(pickedImage!.path),
                           vatGstNumber: vatGstNumberController.text,
                           vatGstTitle: vatGstTitleController.text,
                           openingBalance: openingBalanceController.text,
                         );
                       } catch (e) {
                         EasyLoading.dismiss();
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(e.toString())));
                       }
                     }
                   } else {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Select a Business Category')));
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text('Select a Business Category')));
                   }
                 },
               ),
@@ -142,19 +152,25 @@ class _ProfileSetupState extends State<ProfileSetup> {
                                     // ignore: sized_box_for_whitespace
                                     child: Container(
                                       height: 200.0,
-                                      width: MediaQuery.of(context).size.width - 80,
+                                      width: MediaQuery.of(context).size.width -
+                                          80,
                                       child: Center(
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
                                             GestureDetector(
                                               onTap: () async {
-                                                pickedImage = await _picker.pickImage(source: ImageSource.gallery);
+                                                pickedImage =
+                                                    await _picker.pickImage(
+                                                        source: ImageSource
+                                                            .gallery);
                                                 setState(() {});
                                                 Navigator.pop(context);
                                               },
                                               child: Column(
-                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
                                                 children: [
                                                   const Icon(
                                                     Icons.photo_library_rounded,
@@ -174,12 +190,16 @@ class _ProfileSetupState extends State<ProfileSetup> {
                                             const SizedBox(width: 40.0),
                                             GestureDetector(
                                               onTap: () async {
-                                                pickedImage = await _picker.pickImage(source: ImageSource.camera);
+                                                pickedImage =
+                                                    await _picker.pickImage(
+                                                        source:
+                                                            ImageSource.camera);
                                                 setState(() {});
                                                 Navigator.pop(context);
                                               },
                                               child: Column(
-                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
                                                 children: [
                                                   const Icon(
                                                     Icons.camera,
@@ -214,11 +234,13 @@ class _ProfileSetupState extends State<ProfileSetup> {
                                   // borderRadius: const BorderRadius.all(Radius.circular(120)),
                                   image: pickedImage == null
                                       ? const DecorationImage(
-                                          image: AssetImage('images/noImage.png'),
-                                          fit: BoxFit.cover,
+                                          image: AssetImage(
+                                              'images/plan_details_5.png'),
+                                          fit: BoxFit.fill,
                                         )
                                       : DecorationImage(
-                                          image: FileImage(File(pickedImage!.path)),
+                                          image: FileImage(
+                                              File(pickedImage!.path)),
                                           fit: BoxFit.cover,
                                         ),
                                 ),
@@ -230,7 +252,8 @@ class _ProfileSetupState extends State<ProfileSetup> {
                                   height: 35,
                                   width: 35,
                                   decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.white, width: 2),
+                                    border: Border.all(
+                                        color: Colors.white, width: 2),
                                     // borderRadius: const BorderRadius.all(Radius.circular(120)),
                                     shape: BoxShape.circle,
                                     color: kMainColor,
@@ -245,91 +268,182 @@ class _ProfileSetupState extends State<ProfileSetup> {
                             ],
                           ),
                         ),
-                        const SizedBox(height: 20.0),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: SizedBox(
-                            height: 60.0,
-                            child: FormField(
-                              builder: (FormFieldState<dynamic> field) {
-                                return InputDecorator(
-                                  decoration: kInputDecoration.copyWith(
-                                      floatingLabelBehavior: FloatingLabelBehavior.always,
-                                      labelText: lang.S.of(context).businessCat,
-                                      labelStyle: GoogleFonts.poppins(
-                                        color: Colors.black,
-                                        fontSize: 20.0,
-                                      ),
-                                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
-                                  child: DropdownButtonHideUnderline(child: getCategory(list: categoryList)),
-                                );
-                              },
-                            ),
-                          ),
-                        ),
+                        const SizedBox(height: 40.0),
 
                         ///_________Name________________________
                         Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: AppTextField(
-                            // Optional
-                            textFieldType: TextFieldType.NAME,
-                            controller: nameController,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                // return 'Please enter a valid business name';
-                                return lang.S.of(context).pleaseEnterAValidBusinessName;
-                              }
-                              return null;
-                            },
-                            decoration: kInputDecoration.copyWith(
-                              labelText: lang.S.of(context).businessName,
-                              border: const OutlineInputBorder(),
-                              //hintText: 'Enter Business/Store Name'
-                              hintText: lang.S.of(context).enterBusiness,
-                            ),
-                          ),
-                        ),
-
-                        ///__________Phone_________________________
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: SizedBox(
-                            height: 60.0,
-                            child: AppTextField(
-                              controller: phoneController,
-                              validator: (value) {
-                                return null;
-                              },
-                              textFieldType: TextFieldType.PHONE,
-                              decoration: kInputDecoration.copyWith(
-                                labelText: lang.S.of(context).phone,
-                                hintText: lang.S.of(context).enterYourPhoneNumber,
-                                border: const OutlineInputBorder(),
+                          padding: const EdgeInsets.only(left: 20, right: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Business Category',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                        ),
 
-                        ///_________Address___________________________
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: AppTextField(
-                            // ignore: deprecated_member_use
-                            textFieldType: TextFieldType.ADDRESS,
-                            controller: addressController,
-                            decoration: kInputDecoration.copyWith(
-                              focusedBorder: const OutlineInputBorder(
-                                borderSide: BorderSide(color: kGreyTextColor),
+                              const SizedBox(height: 5.0),
+                              SizedBox(
+                                height: 60.0,
+                                child: FormField(
+                                  builder: (FormFieldState<dynamic> field) {
+                                    return InputDecorator(
+                                      decoration: kInputDecoration.copyWith(
+                                        floatingLabelBehavior:
+                                            FloatingLabelBehavior.always,
+                                        labelStyle: GoogleFonts.poppins(
+                                          color: Colors.black,
+                                          fontSize: 20.0,
+                                        ),
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5.0),
+                                        ),
+                                      ),
+                                      child: DropdownButtonHideUnderline(
+                                        child: getCategory(list: categoryList),
+                                      ),
+                                    );
+                                  },
+                                ),
                               ),
-                              labelText: lang.S.of(context).companyAddress,
-                              hintText: lang.S.of(context).enterFullAddress,
-                              border: const OutlineInputBorder(),
-                            ),
+                            ],
                           ),
                         ),
 
-                        ///________Opening_balance_______________________
+                        const SizedBox(height: 20.0),
+                        ///_________Company & Business Name________________________
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20, right: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Company & Business Name',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
+
+                              const SizedBox(height: 5.0),
+                              SizedBox(
+                                height: 60.0,
+                                child: AppTextField(
+                                  // Optional
+                                  textFieldType: TextFieldType.NAME,
+                                  controller: nameController,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      // return 'Please enter a valid business name';
+                                      return lang.S
+                                          .of(context)
+                                          .pleaseEnterAValidBusinessName;
+                                    }
+                                    return null;
+                                  },
+                                  decoration: kInputDecoration.copyWith(
+                                    border: const OutlineInputBorder(),
+                                    //hintText: 'Enter Business/Store Name'
+                                    hintText: lang.S.of(context).enterBusiness,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        const SizedBox(height: 20.0),
+                        ///_________Enter phone number________________________
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20, right: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Phone Number',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
+
+                              const SizedBox(height: 5.0),
+                              SizedBox(
+                                height: 60.0,
+                                child: AppTextField(
+                                  controller: phoneController,
+                                  validator: (value) {
+                                    return null;
+                                  },
+                                  textFieldType: TextFieldType.PHONE,
+                                  decoration: kInputDecoration.copyWith(
+                                    hintText:
+                                        lang.S.of(context).enterYourPhoneNumber,
+                                    border: const OutlineInputBorder(),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        const SizedBox(height: 20.0),
+                        ///_________Company Address________________________
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20, right: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Company Address',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
+
+                              const SizedBox(height: 5.0),
+                              SizedBox(
+                                height: 60.0,
+                                child: AppTextField(
+                                  // ignore: deprecated_member_use
+                                  textFieldType: TextFieldType.ADDRESS,
+                                  controller: addressController,
+                                  decoration: kInputDecoration.copyWith(
+                                    focusedBorder: const OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: kGreyTextColor),
+                                    ),
+                                    hintText:
+                                        lang.S.of(context).enterFullAddress,
+                                    border: const OutlineInputBorder(),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        /*///________Opening_balance_______________________
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: AppTextField(
@@ -388,7 +502,7 @@ class _ProfileSetupState extends State<ProfileSetup> {
                               ),
                             ),
                           ],
-                        )
+                        )*/
                       ],
                     ),
                   ),
