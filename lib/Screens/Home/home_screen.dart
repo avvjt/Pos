@@ -35,6 +35,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   PageController pageController = PageController(initialPage: 0);
 
+  //premium pop dialog
   void getUpgradeDialog() {
     showDialog(
         context: context,
@@ -65,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
                 SvgPicture.asset(
-                  'assets/upgradePlan.svg',
+                  'assets/onbord3.svg',
                   height: 198,
                   width: 238,
                 ),
@@ -159,6 +160,7 @@ class _HomeScreenState extends State<HomeScreen> {
       return businessInfo.when(data: (details) {
         return Scaffold(
             backgroundColor: kBackgroundColor,
+            ///-------Appbar--------///
             appBar: AppBar(
               backgroundColor: kWhite,
               titleSpacing: 5,
@@ -201,8 +203,11 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             resizeToAvoidBottomInset: true,
+            ///-------RefreshIndicator--------///
             body: RefreshIndicator.adaptive(
+              color: kMainColor,
               onRefresh: () async => refreshAllProviders(ref: ref),
+              ///-------Scrollview--------///
               child: SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
@@ -212,6 +217,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Visibility(
                         visible: details.user?.visibility?.dashboardPermission ?? true,
                         child: summaryInfo.when(data: (summary) {
+                          ///-------summary section started -> Display successfully fetched data--------///
                           return Container(
                             padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: kMainColor),
@@ -310,6 +316,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           );
                         }, error: (e, stack) {
+                          ///-------Display not found to all value--------///
                           return Container(
                             padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: kMainColor),
@@ -406,6 +413,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           );
                         }, loading: () {
+                          ///-------Display Loading to all value--------///
                           return Container(
                             padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: kMainColor),
@@ -503,7 +511,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           );
                         }),
                       ),
-
+                      ///-------subscription section--------///
                       const SizedBox(height: 20),
                       GestureDetector(
                         onTap: () {
@@ -549,6 +557,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       const SizedBox(height: 20),
+
+                      ///-------GridView--------///
                       GridView.count(
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
