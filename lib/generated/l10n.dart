@@ -1291,10 +1291,10 @@ class S {
   }
 
   /// `Powered By Acnoo`
-  String get powerdedByAcnoo {
+  String get  powerdedByHMInfosoft {
     return Intl.message(
-      'Powered By Acnoo',
-      name: 'powerdedByAcnoo',
+      'Powered By HM Infosoft',
+      name: 'powerdedByHMInfosoft',
       desc: '',
       args: [],
     );

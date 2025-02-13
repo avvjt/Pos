@@ -128,9 +128,16 @@ class SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // Set the status bar color
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: kSplashColor, // Set your desired color
+        statusBarIconBrightness: Brightness.dark, // Set icon color (light for dark backgrounds)
+      ),
+    );
     return SafeArea(
       child: Scaffold(
-        backgroundColor: kMainColor,
+        backgroundColor: kSplashColor,
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -146,17 +153,17 @@ class SplashScreenState extends State<SplashScreen> {
               children: [
                 Center(
                   child: Text(
-                    lang.S.of(context).powerdedByAcnoo,
-                    style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 20.0),
+                    lang.S.of(context).powerdedByHMInfosoft,
+                    style: GoogleFonts.poppins(color: Colors.grey, fontWeight: FontWeight.normal, fontSize: 16.0),
                   ),
                 ),
-                Center(
+                /*Center(
                   child: Text(
                     'V $appVersion',
                     style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 15.0),
                   ),
-                ),
-                const SizedBox(height: 10),
+                ),*/
+                const SizedBox(height: 30),
               ],
             ),
           ],

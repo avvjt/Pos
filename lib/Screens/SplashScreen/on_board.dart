@@ -149,7 +149,11 @@ class _OnBoardState extends State<OnBoard> {
               iconWidget: Icons.arrow_forward,
               buttontext: lang.S.of(context).next,
               iconColor: Colors.white,
-              // buttonDecoration: kButtonDecoration.copyWith(color: kMainColor, borderRadius: const BorderRadius.all(Radius.circular(30))),
+                //buttonDecoration for rounded button
+                buttonDecoration: BoxDecoration(
+                  color: kMainColor, // Background color of the button
+                  borderRadius: BorderRadius.circular(30), // Rounded corners
+                ),
               onPressed: () {
                 setState(
                   () {

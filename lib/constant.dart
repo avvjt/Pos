@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-const kMainColor = Color(0xffC52127);
+const kMainColor = Color(0xff0760FB);
 const kGreyTextColor = Color(0xFF828282);
 const kBackgroundColor = Color(0xffF5F3F3);
 const kBorderColorTextField = Color(0xFFC2C2C2);
@@ -12,6 +12,7 @@ const kSuccessColor = Colors.green;
 const kPremiumPlanColor = Color(0xFF8752EE);
 const kPremiumPlanColor2 = Color(0xFFFF5F00);
 const kTitleColor = Color(0xFF000000);
+const kSplashColor = Color(0xFFf8f8ff);
 bool isPrintEnable = false;
 List<String> paymentsTypeList = ['Cash', 'Card', 'Check', 'Mobile Pay', 'Due'];
 const String appVersion = '4.2';
@@ -27,6 +28,7 @@ const String onboard1 = 'images/onbord1.png';
 const String onboard2 = 'images/onbord2.png';
 const String onboard3 = 'images/onbord3.png';
 const String logo = 'images/logo.png';
+const String google = 'images/google.png';
 const String appsName = 'POSpro';
 const String companyWebsite = 'https://acnoo.com';
 const String companyName = 'Acnoo';

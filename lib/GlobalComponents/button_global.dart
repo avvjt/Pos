@@ -113,7 +113,7 @@ class UpdateButton extends StatelessWidget {
         width: double.infinity,
         height: 48,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(30),
           color: kMainColor,
         ),
         child: Text(
@@ -123,4 +123,123 @@ class UpdateButton extends StatelessWidget {
       ),
     );
   }
+}
+
+
+///-------------------GoogleSignIn button--------------------------------
+
+class GoogleSignInButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        // Handle your Google Sign-In logic here
+        print("Google Sign-In Button Pressed");
+      },
+      child: Container(
+        alignment: Alignment.center,
+        width: double.infinity,
+        height: 48,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border.all(color: Colors.grey, width: 2.0),
+          borderRadius: BorderRadius.circular(30),
+        ),
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset(
+              'assets/google.png', // Replace with the path of your Google logo in assets
+              height: 24,
+              width: 24,
+            ),
+            SizedBox(width: 10),
+            Text(
+              "Sign in with Google",
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+
+
+
+
+
+///-----------------------name with logo------------------
+class FirstContent extends StatelessWidget {
+  const FirstContent({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          'First Widget',
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
+        SizedBox(height: 20),
+        Text(
+          'Second Line',
+          style: TextStyle(fontSize: 18),
+        ),
+      ],
+    );
+  }
+}
+
+
+///-----------------------name with logo------------------
+class SecContent extends StatelessWidget {
+  const SecContent({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          'First Widget',
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
+        SizedBox(height: 20),
+        Text(
+          'Second Line',
+          style: TextStyle(fontSize: 18),
+        ),
+      ],
+    );
+  }
+}
+
+// Curve Clipper
+class CurveClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    final path = Path();
+    path.moveTo(0, size.height);
+    path.lineTo(0, size.height * 0.3);
+    path.quadraticBezierTo(
+      size.width / 2,
+      size.height * 0.15,
+      size.width,
+      size.height * 0.3,
+    );
+    path.lineTo(size.width, size.height);
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }
