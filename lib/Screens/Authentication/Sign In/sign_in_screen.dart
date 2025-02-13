@@ -36,14 +36,8 @@ class _SignInState extends State<SignIn> {
 
 
   // Ensure this matches exactly one of the DropdownMenuItem values
-  String selectedLanguage = 'en';
+  String selectedLanguage = 'EN';
 
-  final List<Map<String, String>> languages = [
-    {'code': 'en', 'name': 'English'},
-    {'code': 'hi', 'name': 'Hindi'},
-    {'code': 'es', 'name': 'Spanish'},
-    {'code': 'fr', 'name': 'French'},
-  ];
 
 
   @override
@@ -155,7 +149,7 @@ class _SignInState extends State<SignIn> {
 
           // Background Color
           Container(
-            color: Colors.blue, // Replace with kMainColor if defined
+            color: kMainColor, // Replace with kMainColor if defined
           ),
 
           // Text and Dropdown Positioned
@@ -189,29 +183,49 @@ class _SignInState extends State<SignIn> {
                   ],
                 ),
 
-                // Language Selector Chip
                 Chip(
-                  backgroundColor: Colors.black.withOpacity(0.2),
-                  label: DropdownButtonHideUnderline(
-                    child: DropdownButton<String>(
-                      value: selectedLanguage,
-                      icon: const Icon(Icons.arrow_drop_down, color: Colors.white),
-                      dropdownColor: Colors.blue[700],
-                      items: ['English', 'Hindi', 'Spanish', 'French']
-                          .map((String language) {
-                        return DropdownMenuItem<String>(
-                          value: language,
-                          child: Text(
-                            language,
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                        );
-                      }).toList(),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          selectedLanguage = newValue!;
-                        });
-                      },
+                  padding: EdgeInsets.zero,
+                  backgroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),  // Increase value for more rounded edges
+                  ),
+                  label: InkWell(  // Wrap with InkWell for full clickable area
+                    onTap: () {
+                      // Trigger the dropdown manually
+                    },
+                    child: Transform.scale(
+                      scale: 1.0,
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<String>(
+                          value: selectedLanguage,
+                          icon: const Icon(Icons.arrow_drop_down, color: Colors.black, size: 18),
+                          dropdownColor: Colors.white,
+                          items: [
+                            {'name': 'EN', 'icon': Icons.language,},
+                            {'name': 'HI', 'icon': Icons.translate},
+                            {'name': 'SP', 'icon': Icons.language},
+                            {'name': 'FH', 'icon': Icons.language},
+                          ].map((item) {
+                            return DropdownMenuItem<String>(
+                              value: item['name'] as String,
+                              child: Row(
+                                children: [
+                                  Icon(item['icon'] as IconData, color: kMainColor, size: 16),
+                                  SizedBox(width: 6),
+                                  Text(item['name'] as String, style: TextStyle(color: Colors.black, fontSize: 14)),
+
+                                ],
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              selectedLanguage = newValue!;
+                            });
+                          },
+                          isDense: true,
+                        ),
+                      ),
                     ),
                   ),
                 ),
