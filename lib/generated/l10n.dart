@@ -2680,6 +2680,16 @@ class S {
     );
   }
 
+  /// `Purchase`
+  String get add_purchase {
+    return Intl.message(
+      'Add Purchase',
+      name: 'add_purchase',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Sale`
   String get sale {
     return Intl.message(
@@ -2689,6 +2699,59 @@ class S {
       args: [],
     );
   }
+
+  /// `Sale`
+  String get add_sale {
+    return Intl.message(
+      'Add Sales',
+      name: 'add_sale',
+      desc: '',
+      args: [],
+    );
+  }
+
+
+  /// `Sale`
+  String get add_expenses {
+    return Intl.message(
+      'Add Expenses',
+      name: 'add_expenses',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sale`
+  String get add_customer {
+    return Intl.message(
+      'Add Customer',
+      name: 'add_customer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sale`
+  String get add_supplier {
+    return Intl.message(
+      'Add Supplier',
+      name: 'add_supplier',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sale`
+  String get add_product {
+    return Intl.message(
+      'Add Product',
+      name: 'add_product',
+      desc: '',
+      args: [],
+    );
+  }
+
+
 
   /// `Your Package`
   String get yourPack {

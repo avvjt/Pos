@@ -13,6 +13,9 @@ const kPremiumPlanColor = Color(0xFF8752EE);
 const kPremiumPlanColor2 = Color(0xFFFF5F00);
 const kTitleColor = Color(0xFF000000);
 const kSplashColor = Color(0xFFf8f8ff);
+const gradientStart = Color(0xFF0760FB);
+const gradientEnd = Color(0xFF03307D);
+
 bool isPrintEnable = false;
 List<String> paymentsTypeList = ['Cash', 'Card', 'Check', 'Mobile Pay', 'Due'];
 const String appVersion = '4.2';

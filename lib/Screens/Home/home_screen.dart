@@ -219,8 +219,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: summaryInfo.when(data: (summary) {
                           ///-------summary section started -> Display successfully fetched data--------///
                           return Container(
-                            padding: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: kMainColor),
+                            padding: const EdgeInsets.all(35),
+
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              gradient: LinearGradient(
+                                colors: [gradientStart, gradientEnd], // Define your gradient colors
+                                begin: Alignment.topLeft, // Define the starting point of the gradient
+                                end: Alignment.bottomRight, // Define the ending point of the gradient
+                              ),
+                            ),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
@@ -236,7 +244,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                     ),
                                     const Spacer(),
-                                    Expanded(
+
+                                    //see all part comment
+
+                                    /*Expanded(
                                       flex: 1,
                                       child: GestureDetector(
                                           onTap: () {
@@ -249,67 +260,128 @@ class _HomeScreenState extends State<HomeScreen> {
                                             style: const TextStyle(color: kWhite, fontWeight: FontWeight.w500),
                                             maxLines: 1,
                                           )),
-                                    ),
+                                    ),*/
                                   ],
                                 ),
                                 const SizedBox(height: 10),
                                 Row(
                                   children: [
+                                    // First Column (Sales and Profit/Loss)
                                     Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          lang.S.of(context).sales,
-                                          //'Sales',
-                                          style: gTextStyle.copyWith(color: kWhite),
+                                        // Sales Row with Icon
+                                        Row(
+                                          children: [
+                                            CircleAvatar(
+                                              radius: 18,
+                                              backgroundColor: Colors.blue.withOpacity(0.2),
+                                              child: Icon(Icons.attach_money, size: 16, color: Colors.blue),
+                                            ),
+                                            const SizedBox(width: 8),
+                                            Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  lang.S.of(context).sales,
+                                                  style: gTextStyle.copyWith(color: kWhite),
+                                                ),
+                                                Text(
+                                                  '$currency ${summary.data?.sales?.toStringAsFixed(2) ?? 0}',
+                                                  style: gTextStyle.copyWith(color: kWhite, fontWeight: FontWeight.bold),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
                                         ),
-                                        Text(
-                                          '$currency ${summary.data?.sales?.toStringAsFixed(2) ?? 0}',
-                                          style: gTextStyle.copyWith(color: kWhite, fontWeight: FontWeight.bold),
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        Text(
-                                          summary.data!.income! >= 0 ? 'Profit' : 'Loss',
-                                          style: gTextStyle.copyWith(color: kWhite),
-                                        ),
-                                        Text(
-                                          '$currency ${summary.data?.income?.abs().toStringAsFixed(2) ?? 0}',
-                                          style: gTextStyle.copyWith(color: kWhite, fontWeight: FontWeight.bold),
+                                        const SizedBox(height: 10),
+                                        // Profit/Loss Row with Icon
+                                        Row(
+                                          children: [
+                                            CircleAvatar(
+                                              radius: 18,
+                                              backgroundColor: summary.data!.income! >= 0 ? Colors.green.withOpacity(0.2) : Colors.red.withOpacity(0.2),
+                                              child: Icon(
+                                                summary.data!.income! >= 0 ? Icons.trending_up : Icons.trending_down,
+                                                size: 16,
+                                                color: summary.data!.income! >= 0 ? Colors.green : Colors.red,
+                                              ),
+                                            ),
+                                            const SizedBox(width: 8),
+                                            Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  summary.data!.income! >= 0 ? 'Profit' : 'Loss',
+                                                  style: gTextStyle.copyWith(color: kWhite),
+                                                ),
+                                                Text(
+                                                  '$currency ${summary.data?.income?.abs().toStringAsFixed(2) ?? 0}',
+                                                  style: gTextStyle.copyWith(color: kWhite, fontWeight: FontWeight.bold),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
                                     const Spacer(),
+                                    // Second Column (Purchased and Expense)
                                     Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          lang.S.of(context).purchased,
-                                          // 'Purchased',
-                                          style: gTextStyle.copyWith(color: kWhite),
+                                        // Purchased Row with Icon
+                                        Row(
+                                          children: [
+                                            CircleAvatar(
+                                              radius: 18,
+                                              backgroundColor: Colors.orange.withOpacity(0.2),
+                                              child: Icon(Icons.shopping_cart, size: 16, color: Colors.orange),
+                                            ),
+                                            const SizedBox(width: 8),
+                                            Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  lang.S.of(context).purchased,
+                                                  style: gTextStyle.copyWith(color: kWhite),
+                                                ),
+                                                Text(
+                                                  '$currency ${summary.data?.purchase?.toStringAsFixed(2) ?? 0}',
+                                                  style: gTextStyle.copyWith(color: kWhite, fontWeight: FontWeight.bold),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
                                         ),
-                                        Text(
-                                          '$currency ${summary.data?.purchase?.toStringAsFixed(2) ?? 0}',
-                                          style: gTextStyle.copyWith(color: kWhite, fontWeight: FontWeight.bold),
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        Text(
-                                          //'Expense',
-                                          lang.S.of(context).expense,
-                                          style: gTextStyle.copyWith(color: kWhite),
-                                        ),
-                                        Text(
-                                          '$currency ${summary.data?.expense?.toStringAsFixed(2) ?? 0}',
-                                          style: gTextStyle.copyWith(color: kWhite, fontWeight: FontWeight.bold),
+                                        const SizedBox(height: 10),
+                                        // Expense Row with Icon
+                                        Row(
+                                          children: [
+                                            CircleAvatar(
+                                              radius: 18,
+                                              backgroundColor: Colors.purple.withOpacity(0.2),
+                                              child: Icon(Icons.money_off, size: 16, color: Colors.purple),
+                                            ),
+                                            const SizedBox(width: 8),
+                                            Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  lang.S.of(context).expense,
+                                                  style: gTextStyle.copyWith(color: kWhite),
+                                                ),
+                                                Text(
+                                                  '$currency ${summary.data?.expense?.toStringAsFixed(2) ?? 0}',
+                                                  style: gTextStyle.copyWith(color: kWhite, fontWeight: FontWeight.bold),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
-                                    const SizedBox(
-                                      width: 30,
-                                    ),
+                                    const SizedBox(width: 30),
                                   ],
                                 )
                               ],
@@ -347,66 +419,118 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 Row(
                                   children: [
+                                    // First Column (Sales and Income)
                                     Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          lang.S.of(context).sales,
-                                          //'Sales',
-                                          style: gTextStyle.copyWith(color: kWhite),
+                                        // Sales Row with Icon
+                                        Row(
+                                          children: [
+                                            CircleAvatar(
+                                              radius: 18,
+                                              backgroundColor: Colors.blue.withOpacity(0.2),
+                                              child: Icon(Icons.attach_money, size: 16, color: Colors.blue),
+                                            ),
+                                            const SizedBox(width: 8),
+                                            Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  lang.S.of(context).sales,
+                                                  style: gTextStyle.copyWith(color: kWhite),
+                                                ),
+                                                Text(
+                                                  lang.S.of(context).notFound,
+                                                  style: gTextStyle.copyWith(color: kWhite, fontWeight: FontWeight.bold),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
                                         ),
-                                        Text(
-                                          lang.S.of(context).notFound,
-                                          // 'Not Found',
-                                          style: gTextStyle.copyWith(color: kWhite, fontWeight: FontWeight.bold),
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        Text(
-                                          lang.S.of(context).income,
-                                          // 'Income',
-                                          style: gTextStyle.copyWith(color: kWhite),
-                                        ),
-                                        Text(
-                                          lang.S.of(context).notFound,
-                                          //'Not Found',
-                                          style: gTextStyle.copyWith(color: kWhite, fontWeight: FontWeight.bold),
+                                        const SizedBox(height: 10),
+                                        // Income Row with Icon
+                                        Row(
+                                          children: [
+                                            CircleAvatar(
+                                              radius: 18,
+                                              backgroundColor: Colors.green.withOpacity(0.2),
+                                              child: Icon(Icons.trending_up, size: 16, color: Colors.green),
+                                            ),
+                                            const SizedBox(width: 8),
+                                            Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  lang.S.of(context).income,
+                                                  style: gTextStyle.copyWith(color: kWhite),
+                                                ),
+                                                Text(
+                                                  lang.S.of(context).notFound,
+                                                  style: gTextStyle.copyWith(color: kWhite, fontWeight: FontWeight.bold),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
                                     const Spacer(),
+                                    // Second Column (Purchased and Expense)
                                     Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          lang.S.of(context).purchased,
-                                          // 'Purchased',
-                                          style: gTextStyle.copyWith(color: kWhite),
+                                        // Purchased Row with Icon
+                                        Row(
+                                          children: [
+                                            CircleAvatar(
+                                              radius: 18,
+                                              backgroundColor: Colors.orange.withOpacity(0.2),
+                                              child: Icon(Icons.shopping_cart, size: 16, color: Colors.orange),
+                                            ),
+                                            const SizedBox(width: 8),
+                                            Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  lang.S.of(context).purchased,
+                                                  style: gTextStyle.copyWith(color: kWhite),
+                                                ),
+                                                Text(
+                                                  lang.S.of(context).notFound,
+                                                  style: gTextStyle.copyWith(color: kWhite, fontWeight: FontWeight.bold),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
                                         ),
-                                        Text(
-                                          lang.S.of(context).notFound,
-                                          //'Not Found',
-                                          style: gTextStyle.copyWith(color: kWhite, fontWeight: FontWeight.bold),
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        Text(
-                                          lang.S.of(context).expense,
-                                          //'Expense',
-                                          style: gTextStyle.copyWith(color: kWhite),
-                                        ),
-                                        Text(
-                                          lang.S.of(context).notFound,
-                                          //'Not Found',
-                                          style: gTextStyle.copyWith(color: kWhite, fontWeight: FontWeight.bold),
+                                        const SizedBox(height: 10),
+                                        // Expense Row with Icon
+                                        Row(
+                                          children: [
+                                            CircleAvatar(
+                                              radius: 18,
+                                              backgroundColor: Colors.purple.withOpacity(0.2),
+                                              child: Icon(Icons.money_off, size: 16, color: Colors.purple),
+                                            ),
+                                            const SizedBox(width: 8),
+                                            Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  lang.S.of(context).expense,
+                                                  style: gTextStyle.copyWith(color: kWhite),
+                                                ),
+                                                Text(
+                                                  lang.S.of(context).notFound,
+                                                  style: gTextStyle.copyWith(color: kWhite, fontWeight: FontWeight.bold),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
-                                    const SizedBox(
-                                      width: 30,
-                                    ),
+                                    const SizedBox(width: 30),
                                   ],
                                 )
                               ],
@@ -442,68 +566,121 @@ class _HomeScreenState extends State<HomeScreen> {
                                 const SizedBox(
                                   height: 10,
                                 ),
+
                                 Row(
                                   children: [
+                                    // First Column (Sales and Income)
                                     Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          lang.S.of(context).sales,
-                                          // 'Sales',
-                                          style: gTextStyle.copyWith(color: kWhite),
+                                        // Sales Row with Icon
+                                        Row(
+                                          children: [
+                                            CircleAvatar(
+                                              radius: 18,
+                                              backgroundColor: Colors.blue.withOpacity(0.2),
+                                              child: Icon(Icons.attach_money, size: 16, color: Colors.blue),
+                                            ),
+                                            const SizedBox(width: 8),
+                                            Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  lang.S.of(context).sales,
+                                                  style: gTextStyle.copyWith(color: kWhite),
+                                                ),
+                                                Text(
+                                                  lang.S.of(context).loading,
+                                                  style: gTextStyle.copyWith(color: kWhite, fontWeight: FontWeight.bold),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
                                         ),
-                                        Text(
-                                          lang.S.of(context).loading,
-                                          // 'Loading',
-                                          style: gTextStyle.copyWith(color: kWhite, fontWeight: FontWeight.bold),
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        Text(
-                                          lang.S.of(context).income,
-                                          //'Income',
-                                          style: gTextStyle.copyWith(color: kWhite),
-                                        ),
-                                        Text(
-                                          lang.S.of(context).loading,
-                                          //'Loading',
-                                          style: gTextStyle.copyWith(color: kWhite, fontWeight: FontWeight.bold),
+                                        const SizedBox(height: 10),
+                                        // Income Row with Icon
+                                        Row(
+                                          children: [
+                                            CircleAvatar(
+                                              radius: 18,
+                                              backgroundColor: Colors.green.withOpacity(0.2),
+                                              child: Icon(Icons.trending_up, size: 16, color: Colors.green),
+                                            ),
+                                            const SizedBox(width: 8),
+                                            Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  lang.S.of(context).income,
+                                                  style: gTextStyle.copyWith(color: kWhite),
+                                                ),
+                                                Text(
+                                                  lang.S.of(context).loading,
+                                                  style: gTextStyle.copyWith(color: kWhite, fontWeight: FontWeight.bold),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
                                     const Spacer(),
+                                    // Second Column (Purchased and Expense)
                                     Column(
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          lang.S.of(context).purchased,
-                                          //'Purchased',
-                                          style: gTextStyle.copyWith(color: kWhite),
+                                        // Purchased Row with Icon
+                                        Row(
+                                          children: [
+                                            CircleAvatar(
+                                              radius: 18,
+                                              backgroundColor: Colors.orange.withOpacity(0.2),
+                                              child: Icon(Icons.shopping_cart, size: 16, color: Colors.orange),
+                                            ),
+                                            const SizedBox(width: 8),
+                                            Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  lang.S.of(context).purchased,
+                                                  style: gTextStyle.copyWith(color: kWhite),
+                                                ),
+                                                Text(
+                                                  lang.S.of(context).loading,
+                                                  style: gTextStyle.copyWith(color: kWhite, fontWeight: FontWeight.bold),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
                                         ),
-                                        Text(
-                                          lang.S.of(context).loading,
-                                          //'Loading',
-                                          style: gTextStyle.copyWith(color: kWhite, fontWeight: FontWeight.bold),
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        Text(
-                                          lang.S.of(context).expense,
-                                          //'Expense',
-                                          style: gTextStyle.copyWith(color: kWhite),
-                                        ),
-                                        Text(
-                                          lang.S.of(context).loading,
-                                          //'Loading',
-                                          style: gTextStyle.copyWith(color: kWhite, fontWeight: FontWeight.bold),
+                                        const SizedBox(height: 10),
+                                        // Expense Row with Icon
+                                        Row(
+                                          children: [
+                                            CircleAvatar(
+                                              radius: 18,
+                                              backgroundColor: Colors.purple.withOpacity(0.2),
+                                              child: Icon(Icons.money_off, size: 16, color: Colors.purple),
+                                            ),
+                                            const SizedBox(width: 8),
+                                            Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  lang.S.of(context).expense,
+                                                  style: gTextStyle.copyWith(color: kWhite),
+                                                ),
+                                                Text(
+                                                  lang.S.of(context).loading,
+                                                  style: gTextStyle.copyWith(color: kWhite, fontWeight: FontWeight.bold),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
-                                    const SizedBox(
-                                      width: 30,
-                                    ),
+                                    const SizedBox(width: 30),
                                   ],
                                 )
                               ],
@@ -512,7 +689,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         }),
                       ),
                       ///-------subscription section--------///
-                      const SizedBox(height: 20),
+                      /*const SizedBox(height: 20),
                       GestureDetector(
                         onTap: () {
                           getUpgradeDialog();
@@ -555,7 +732,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                         ),
-                      ),
+                      ),*/
                       const SizedBox(height: 20),
 
                       ///-------GridView--------///
@@ -575,6 +752,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       const SizedBox(height: 20),
+
+                      ///________________Divider (after this banner is showing)__________________
                       Container(
                         height: 1,
                         width: double.infinity,

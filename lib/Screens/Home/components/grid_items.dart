@@ -75,6 +75,8 @@ List<GridItems> getFreeIcons({required BuildContext context}) {
       route: 'tax',
     ),
 
+
+
     // GridItems(
     //   title: 'Delivery',
     //   icon: 'images/delivery.png',
@@ -87,6 +89,38 @@ List<GridItems> getFreeIcons({required BuildContext context}) {
     //   title: 'Expense',
     //   icon: 'images/expenses.png',
     // )
+
+    GridItems(
+      title: 'Add Sales',
+      icon: 'assets/add_sales.png',
+      route: 'Add Sales',
+    ),
+    GridItems(
+      title: 'Add Purchase',
+      icon: 'assets/add_purchase.png',
+      route: 'Add Purchase',
+    ),
+    GridItems(
+      title: 'Add Expenses',
+      icon: 'assets/add_expenses.png',
+      route: 'Add Expenses',
+    ),
+    GridItems(
+      title: 'Add Customer',
+      icon: 'assets/add_customer.png',
+      route: 'Add Customer',
+    ),
+    GridItems(
+      title: 'Add Supplier',
+      icon: 'assets/add_supplier.png',
+      route: 'Add Supplier',
+    ),
+    GridItems(
+      title: 'Add product',
+      icon: 'assets/add_product.png',
+      route: 'Add product',
+    ),
+
   ];
   return freeIcons;
 }
