@@ -202,9 +202,8 @@ class _SignInState extends State<SignIn> {
                           dropdownColor: Colors.white,
                           items: [
                             {'name': 'EN', 'icon': Icons.language,},
-                            {'name': 'HI', 'icon': Icons.translate},
-                            {'name': 'SP', 'icon': Icons.language},
-                            {'name': 'FH', 'icon': Icons.language},
+                            {'name': 'AR', 'icon': Icons.translate},
+
                           ].map((item) {
                             return DropdownMenuItem<String>(
                               value: item['name'] as String,
@@ -240,10 +239,22 @@ class _SignInState extends State<SignIn> {
             child: Container(
               padding: const EdgeInsets.all(16.0),
               height: MediaQuery.of(context).size.height * 0.75,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(30), topRight: Radius.circular(30)),
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(30),
+                  topRight: Radius.circular(30),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.white.withOpacity(0.2), // Shadow color with opacity
+                    spreadRadius: 4, // How much the shadow spreads
+                    blurRadius: 10, // Softness of the shadow
+                    offset: const Offset(0, -5), // Moves the shadow upward
+                  ),
+                ],
               ),
+
               child: Form(
                 key: _formKey, // Assign the GlobalKey<FormState>
                 child: Column(
@@ -339,7 +350,7 @@ class _SignInState extends State<SignIn> {
                         Text(
                           lang.S.of(context).rememberMe,
                           //'Remember me',
-                          style: textTheme.bodyMedium?.copyWith(color: kGreyTextColor),
+                          style: textTheme.bodyMedium?.copyWith(color: kTitleColor),
                         ),
                         const Spacer(),
                         TextButton(
@@ -359,7 +370,7 @@ class _SignInState extends State<SignIn> {
                           child: Text(
                             lang.S.of(context).forgotPassword,
                             //'Forgot password?',
-                            style: textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold, fontSize: 14),
+                            style: textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.normal, fontSize: 14, color: kMainColor),
                           ),
                         ),
 
@@ -395,8 +406,11 @@ class _SignInState extends State<SignIn> {
                               text:
                               lang.S.of(context).donNotHaveAnAccount,
                               //'Don’t have an account? ',
-                              style: textTheme.bodyMedium?.copyWith(color: kGreyTextColor),
+                              style: textTheme.bodyMedium?.copyWith(color: kTitleColor),
                               children: [
+                                const WidgetSpan(
+                                  child: SizedBox(width: 5.0),
+                                ),
                                 TextSpan(
                                   text:lang.S.of(context).signUp,
                                   // text:'Sign Up',
