@@ -6,6 +6,7 @@ import 'package:mobile_pos/Screens/Authentication/Sign%20Up/repo/sign_up_repo.da
 import 'package:mobile_pos/Screens/Authentication/Sign%20Up/verify_email.dart';
 import '../../../GlobalComponents/button_global.dart';
 import '../../../GlobalComponents/glonal_popup.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../../constant.dart';
 import '../Sign In/sign_in_screen.dart';
 import '../Wedgets/check_email_for_otp_popup.dart';
@@ -126,19 +127,27 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           icon: const Icon(Icons.arrow_drop_down, color: Colors.black, size: 18),
                           dropdownColor: Colors.white,
                           items: [
-                            {'name': 'EN', 'icon': Icons.language,},
-                            {'name': 'HI', 'icon': Icons.translate},
-                            {'name': 'SP', 'icon': Icons.language},
-                            {'name': 'FH', 'icon': Icons.language},
+                            {
+                              'name': 'EN',
+                              'icon': 'assets/uk.svg',  // Path to your SVG file
+                            },
+                            {
+                              'name': 'AR',
+                              'icon': 'assets/uae.svg',
+                            },
                           ].map((item) {
                             return DropdownMenuItem<String>(
                               value: item['name'] as String,
                               child: Row(
                                 children: [
-                                  Icon(item['icon'] as IconData, color: kMainColor, size: 16),
+                                  if (item['icon'] is String)  // Check if the icon is an SVG path
+                                    SvgPicture.asset(
+                                      item['icon'] as String,
+                                      width: 16,
+                                      height: 16,
+                                    ),
                                   SizedBox(width: 6),
                                   Text(item['name'] as String, style: TextStyle(color: Colors.black, fontSize: 14)),
-
                                 ],
                               ),
                             );

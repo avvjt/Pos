@@ -3196,7 +3196,7 @@ class S {
   /// `Forgot password`
   String get forgotPassword {
     return Intl.message(
-      'Forgot password',
+      'Forgot password?',
       name: 'forgotPassword',
       desc: '',
       args: [],
@@ -3446,7 +3446,7 @@ class S {
   /// `Verity Email`
   String get verityEmail {
     return Intl.message(
-      'Verity Email',
+      'Verify Email',
       name: 'verityEmail',
       desc: '',
       args: [],
@@ -3466,7 +3466,7 @@ class S {
   /// `6-digits pin has been sent to your email address: `
   String get digits {
     return Intl.message(
-      '6-digits pin has been sent to your email address ',
+      'Enter 6 digit verification code sent to your email address ',
       name: 'digits',
       desc: '',
       args: [],
@@ -3494,9 +3494,9 @@ class S {
   }
 
   /// `Verify Your Email`
-  String get verifyYourEmail {
+  String get verifyEmail {
     return Intl.message(
-      'Verify Your Email',
+      'Verify Email',
       name: 'verifyYourEmail',
       desc: '',
       args: [],

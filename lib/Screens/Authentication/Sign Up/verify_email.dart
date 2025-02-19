@@ -89,18 +89,14 @@ class _VerifyEmailState extends State<VerifyEmail> {
           surfaceTintColor: kWhite,
           centerTitle: true,
           titleSpacing: 16,
-          title: Text(
-            lang.S.of(context).verityEmail,
-           // 'Verity Email',
-            style: textTheme.titleMedium?.copyWith(fontSize: 20),
-          ),
+          title: null,
         ),
         body: Padding(
           padding: const EdgeInsets.fromLTRB(16.0, 20.0, 16.0, 0.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(lang.S.of(context).verityEmail,
+              Text(lang.S.of(context).verifyEmail,
                // 'Verification',
                 style: textTheme.titleMedium?.copyWith(fontSize: 24.0),
               ),
@@ -185,6 +181,8 @@ class _VerifyEmailState extends State<VerifyEmail> {
                 ],
               ),
               const SizedBox(height: 24.0),
+
+              ///-------Update
               UpdateButton(
                 onpressed: widget.isFormForgotPass
                     ? () async {

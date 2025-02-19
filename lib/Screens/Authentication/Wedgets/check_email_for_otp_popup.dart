@@ -31,7 +31,7 @@ Future<dynamic> checkEmailForCodePupUp({required String email, required BuildCon
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    lang.S.of(context).verifyYourEmail,
+                    lang.S.of(context).verifyEmail,
                    // 'Verify Your Email',
                     style: textTheme.titleMedium?.copyWith(fontSize: 24.0),
                   ),

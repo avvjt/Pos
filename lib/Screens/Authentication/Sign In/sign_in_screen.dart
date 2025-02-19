@@ -9,6 +9,7 @@ import '../../../constant.dart';
 import '../Sign Up/sign_up_screen.dart';
 import '../forgot password/forgot_password.dart';
 import 'Repo/sign_in_repo.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mobile_pos/generated/l10n.dart' as lang;
 
 class SignIn extends StatefulWidget {
@@ -201,18 +202,27 @@ class _SignInState extends State<SignIn> {
                           icon: const Icon(Icons.arrow_drop_down, color: Colors.black, size: 18),
                           dropdownColor: Colors.white,
                           items: [
-                            {'name': 'EN', 'icon': Icons.language,},
-                            {'name': 'AR', 'icon': Icons.translate},
-
+                            {
+                              'name': 'EN',
+                              'icon': 'assets/uk.svg',  // Path to your SVG file
+                            },
+                            {
+                              'name': 'AR',
+                              'icon': 'assets/uae.svg',
+                            },
                           ].map((item) {
                             return DropdownMenuItem<String>(
                               value: item['name'] as String,
                               child: Row(
                                 children: [
-                                  Icon(item['icon'] as IconData, color: kMainColor, size: 16),
+                                  if (item['icon'] is String)  // Check if the icon is an SVG path
+                                    SvgPicture.asset(
+                                      item['icon'] as String,
+                                      width: 16,
+                                      height: 16,
+                                    ),
                                   SizedBox(width: 6),
                                   Text(item['name'] as String, style: TextStyle(color: Colors.black, fontSize: 14)),
-
                                 ],
                               ),
                             );
